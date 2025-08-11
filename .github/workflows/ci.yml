@@ -25,23 +25,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Configura Node 22 y pnpm (corepack)
+      # Configura Node
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Enable corepack (pnpm)
-        run: corepack enable pnpm
-
-      - name: Ensure pnpm
-        run: |
-          if ! command -v pnpm >/dev/null 2>&1; then
-            echo "pnpm no encontrado, instalando via corepack";
-            corepack prepare pnpm@10.14.0 --activate;
-          fi
-          pnpm --version
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+          run_install: false
+          cache: true
 
       - name: Install deps
         run: |
