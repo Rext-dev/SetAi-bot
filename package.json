@@ -1,0 +1,39 @@
+{
+  "name": "setai-bot",
+  "version": "0.1.0",
+  "description": "Setai - Bot de Discord autónomo impulsado por IA (Node 22 + TypeScript)",
+  "type": "module",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "tsx watch bot/src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "typescript",
+    "ai"
+  ],
+  "author": "Rext-dev",
+  "license": "MIT",
+  "packageManager": "pnpm@10.14.0",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+  "@types/node": "^22.5.0",
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+  "ts-node": "^10.9.2",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}
