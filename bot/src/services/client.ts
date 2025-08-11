@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits, Partials, type Message } from "discord.js";
-import { getCommand } from "../commands/index.js";
+import { getCommand } from "../commands";
 
 export function createClient() {
   const client = new Client({
