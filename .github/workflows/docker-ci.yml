@@ -1,4 +1,4 @@
-name: CI - Build & Push
+name: Docker (Push sólo en main)
 
 on:
   push:
@@ -19,27 +19,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "pnpm"
-
-      - name: Enable corepack (pnpm)
-        run: corepack enable
-
-      - name: Install deps
-        run: |
-          if [ -f package.json ] && [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; fi
-
-      - name: Test
-        run: |
-          if [ -f package.json ]; then pnpm -s run test --if-present; else echo "Sin tests"; fi
-
-      - name: Build TS
-        run: |
-          if [ -f package.json ]; then pnpm run build; fi
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -62,3 +41,6 @@ jobs:
           tags: |
             ghcr.io/rext-dev/setai-bot:${{ github.sha }}
             ghcr.io/rext-dev/setai-bot:latest
+            ghcr.io/rext-dev/setai-bot:stable
+          build-args: |
+            GIT_SHA=${{ github.sha }}
