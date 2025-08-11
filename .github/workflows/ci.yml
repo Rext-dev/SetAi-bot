@@ -35,6 +35,14 @@ jobs:
       - name: Enable corepack (pnpm)
         run: corepack enable
 
+      - name: Ensure pnpm
+        run: |
+          if ! command -v pnpm >/dev/null 2>&1; then
+            echo "pnpm no encontrado, instalando via corepack";
+            corepack prepare pnpm@10.14.0 --activate;
+          fi
+          pnpm --version
+
       - name: Install deps
         run: |
           if [ -f package.json ] && [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else echo "Sin package.json o pnpm-lock.yaml"; fi
