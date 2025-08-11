@@ -33,7 +33,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Enable corepack (pnpm)
-        run: corepack enable
+        run: corepack enable pnpm
 
       - name: Ensure pnpm
         run: |
