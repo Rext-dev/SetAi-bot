@@ -43,11 +43,9 @@ jobs:
         run: |
           if [ -f package.json ] && [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else echo "Sin package.json o pnpm-lock.yaml"; fi
       - name: Build
-        run: |
-          if [ -f package.json ]; then pnpm run build; fi
+        run: pnpm run build
       - name: Run tests
-        run: |
-          if [ -f package.json ]; then pnpm -s run test --if-present; else echo "Sin tests"; fi
+        run: pnpm run test
 
       # Paso opcional: build de la imagen (sin push en PR)
       - name: Set up QEMU
