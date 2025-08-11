@@ -3,8 +3,8 @@
   "compilerOptions": {
     "noEmit": true,
     "types": ["node", "jest"],
-    "module": "ESNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "rootDir": ".",
     "outDir": ".ts-jest"
   },

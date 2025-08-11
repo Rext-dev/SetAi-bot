@@ -1,17 +1,16 @@
 /** @type {import('jest').Config} */
 module.exports = {
-  preset: "ts-jest",
-  testEnvironment: "node",
-  roots: ["<rootDir>/bot"],
-  testMatch: ["**/*.test.ts"],
-  moduleFileExtensions: ["ts", "js", "json"],
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  roots: ['<rootDir>/bot'],
+  testMatch: ['**/*.test.ts'],
+  moduleFileExtensions: ['ts', 'js', 'json'],
   transform: {
-    "^.+\\.ts$": [
-      "ts-jest",
-      { tsconfig: "<rootDir>/tsconfig.jest.json", useESM: true },
+    '^.+\\.ts$': [
+      'ts-jest',
+      { tsconfig: '<rootDir>/tsconfig.jest.json' }
     ],
   },
-  extensionsToTreatAsEsm: [".ts"],
   collectCoverage: true,
   coverageThreshold: {
     global: {
@@ -21,6 +20,6 @@ module.exports = {
       branches: 50,
     },
   },
-  collectCoverageFrom: ["bot/src/**/*.ts", "!bot/src/**/*.d.ts"],
-  coverageDirectory: "coverage",
+  collectCoverageFrom: ['bot/src/**/*.ts', '!bot/src/**/*.d.ts'],
+  coverageDirectory: 'coverage',
 };
