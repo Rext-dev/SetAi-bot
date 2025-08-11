@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Configura Node 22 y pnpm (corepack)
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Enable corepack (pnpm)
+        run: corepack enable
+
+      - name: Install deps
+        run: |
+          if [ -f package.json ] && [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else echo "Sin package.json o pnpm-lock.yaml"; fi
+      - name: Build
+        run: |
+          if [ -f package.json ]; then pnpm run build; fi
+      - name: Run tests
+        run: |
+          if [ -f package.json ]; then pnpm -s run test --if-present; else echo "Sin tests"; fi
+
+      # Docker desactivado por repositorio vacío
+      # Para reactivar: descomenta los pasos de QEMU/Buildx, login y build-push.
+      # Requisitos:
+      # - Dockerfile en la raíz (o ajusta context)
+      # - Configura la imagen ghcr.io/<owner>/<name>
+      # - Agrega secret GHCR_TOKEN (o usa GITHUB_TOKEN con permisos write:packages)
+      # - Ajusta 'paths' del trigger si quieres sólo construir cuando cambien archivos relevantes
+      #
+      # - name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v3
+      #
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+      #
+      # - name: Log in to GHCR
+      #   uses: docker/login-action@v3
+      #   with:
+      #     registry: ghcr.io
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.GHCR_TOKEN }}
+      #
+  # - name: Build and push image
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: |
+      #       ghcr.io/<owner>/<repo>:${{ github.sha }}
+      #       ghcr.io/<owner>/<repo>:latest
