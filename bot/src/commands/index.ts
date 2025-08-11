@@ -2,7 +2,7 @@ export type CommandHandler = (
   args: string[]
 ) => Promise<string | undefined> | string | undefined;
 
-import { sumar } from "../utils/math";
+import { sumar } from "../utils/math.js";
 
 const commands: Record<string, CommandHandler> = {
   sumar: (args: string[]) => {

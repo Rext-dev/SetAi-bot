@@ -1,5 +1,6 @@
 import 'dotenv/config';
-import { createClient } from './services/client';
+// Import ESM con extensión .js para que Node lo resuelva tras compilar
+import { createClient } from './services/client.js';
 
 async function main() {
   const token = process.env.DISCORD_TOKEN;
