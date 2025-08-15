@@ -1,57 +1,83 @@
-# Setai (Bot)
+# Setai Bot
 
-> Setai es un bot de Discord autónomo impulsado por IA con el que podrás configurar tu servidor de Discord fácil y rápido.
+> Setai is an autonomous AI-powered Discord bot that lets you configure your Discord server easily and quickly.
 
-## Arquitectura
-- Bot (este repo) → API ← WebApp
-- Este repositorio contiene únicamente el bot (Node.js 22.18 LTS) y usa pnpm como gestor de paquetes.
+## Architecture
+- Bot (this repo) → API ← WebApp
+- This repository contains only the bot (Node.js 22.18 LTS) and uses pnpm as package manager.
 
 ## Features
-- Comunicarte con lenguaje natural.
-- Leer, crear y editar canales, roles, categorías y más.
-- Compatible con cualquier API/Modelo (o vía OpenAI SDK).
-- Se adapta al estilo y configuración que definas.
-- API y WebApp públicos (planificados).
-- Más por llegar.
+- Communicate with natural language
+- Read, create and edit channels, roles, categories and more
+- Compatible with any API/Model (or via OpenAI SDK)
+- Adapts to the style and configuration you define
+- Public API and WebApp (planned)
+- More to come
 
-## Prerrequisitos
-- Node.js 22.x (LTS). Recomendado: usar Docker o nvm.
-- pnpm (vía corepack):
-	- corepack enable
-	- pnpm -v
+## Prerequisites
+- Node.js 22.x (LTS). Recommended: use Docker or nvm
+- pnpm (via corepack):
+  ```bash
+  corepack enable
+  pnpm -v
+  ```
 
-## Desarrollo local (pnpm)
-- Instalar dependencias: pnpm install
-- Variables de entorno: crea un archivo .env con al menos:
-	- DISCORD_TOKEN=...
-	- REDIS_URL=redis://localhost:6379 (o tu instancia)
-- Ejecutar en dev: pnpm run dev
-- Ejecutar en prod: pnpm start
-- Tests: pnpm test
+## Local Development (pnpm)
+- Install dependencies: `pnpm install`
+- Environment variables: create a `.env` file with at least:
+  ```
+  DISCORD_TOKEN=...
+  REDIS_URL=redis://localhost:6379
+  ```
+- Run in dev: `pnpm run dev`
+- Run in prod: `pnpm start`
+- Tests: `pnpm test`
 
 ## Docker
-- Imagen base recomendada: node:22-alpine
-- Pasos de referencia (en tu host):
-	- docker pull node:22-alpine
-	- docker run -it --rm --entrypoint sh node:22-alpine
-	- node -v  # debería mostrar v22.x
-	- corepack enable pnpm && pnpm -v
-- Build local de la imagen del bot (desde la raíz del repo):
-	- docker build -t setai-bot:dev .
-	- docker run --rm -e DISCORD_TOKEN=... -e REDIS_URL=redis://redis:6379 setai-bot:dev
-- Nota: El workflow de GitHub Actions incluye un pipeline de Docker comentado; descoméntalo cuando tengas los secretos y la imagen definidos.
+- Recommended base image: `node:22-alpine`
+- Reference steps (on your host):
+  ```bash
+  docker pull node:22-alpine
+  docker run -it --rm --entrypoint sh node:22-alpine
+  node -v  # should show v22.x
+  corepack enable pnpm && pnpm -v
+  ```
+- Local build of bot image (from repo root):
+  ```bash
+  docker build -t setai-bot:dev .
+  docker run --rm -e DISCORD_TOKEN=... -e REDIS_URL=redis://redis:6379 setai-bot:dev
+  ```
+- Note: GitHub Actions workflow includes a commented Docker pipeline; uncomment when you have secrets and image defined.
 
-## Monorepo y servicios
-- Bot: https://github.com/Rext-dev/SetAi-bot (este repo)
-- API: (próximamente)
-- WebApp: (próximamente)
+## Monorepo and Services
+- Bot: https://github.com/Rext-dev/SetAi-bot (this repo)
+- API: (coming soon)
+- WebApp: (coming soon)
 
-## Comunidad
-- Próximamente
+## 📚 Documentation
 
-## Contribuir
-- Lee CONTRIBUTING.md para flujo de ramas, PRs y convenciones de commits.
-- Usa Conventional Commits (feat, fix, chore, docs, etc.).
+The comprehensive technical documentation is available in the `docs/` folder:
 
-## Licencia
-- Open Source. Propuesta: MIT para maximizar adopción y contribuciones.
+### 🚀 Getting Started
+- [Installation Guide](docs/requirements/installation-guide.md) - Complete setup instructions
+- [Technical Requirements](docs/requirements/technical-requirements.md) - Infrastructure and dependencies
+
+### 🏛️ Architecture
+- [Project Architecture](docs/architecture/project-architecture.md) - System design and architecture
+- [C4 Architecture Diagrams](docs/diagrams/README.md) - Visual system architecture
+- [Process Flowcharts](docs/diagrams/process-flowcharts.md) - Workflow documentation
+
+### 🔌 API & Integration
+- [API Specifications](docs/api/api-specifications.md) - REST API documentation
+- [Data Models](docs/api/data-models.md) - Database schemas and data structures
+- [Command Specifications](docs/requirements/command-specifications.md) - Bot commands and syntax
+
+## Community
+- Coming soon
+
+## Contributing
+- Read CONTRIBUTING.md for branch flow, PRs and commit conventions
+- Use Conventional Commits (feat, fix, chore, docs, etc.)
+
+## License
+- Open Source. Proposed: MIT to maximize adoption and contributions
