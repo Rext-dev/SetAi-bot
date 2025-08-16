@@ -1,37 +1,28 @@
-name: CI (Build + Test)
+name: CI (Build + Test + Docker)
 
 on:
   push:
-    branches: ["main", "develop", "feature/*", "Feature/*"]
-    paths:
-      - "bot/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
-      - "tsconfig.json"
-      - "jest.config.cjs"
+    branches: ['main', 'develop', 'feature/*']
   pull_request:
-    branches: ["main", "develop"]
-    paths:
-      - "bot/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
-      - "tsconfig.json"
-      - "jest.config.cjs"
+    branches: ['main', 'develop']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
-  build-test:
+  build-test-docker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
 
-      # Configura Node y pnpm
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10.14.0
           run_install: false
-          cache: true
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -40,14 +31,15 @@ jobs:
           cache: 'pnpm'
 
       - name: Install deps
-        run: |
-          if [ -f package.json ] && [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else echo "Sin package.json o pnpm-lock.yaml"; fi
+        run: pnpm install --frozen-lockfile
+
       - name: Build
         run: pnpm run build
+
       - name: Run tests
         run: pnpm run test
 
-      # Paso opcional: build de la imagen (sin push en PR)
+      # Docker pasos solo si es push (no PR)
       - name: Set up QEMU
         if: github.event_name == 'push'
         uses: docker/setup-qemu-action@v3
@@ -64,23 +56,38 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build (no push) for PR validation
-        if: github.event_name == 'pull_request'
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: false
-          build-args: |
-            GIT_SHA=${{ github.sha }}
-
-      - name: Build & Push image
-        if: github.event_name == 'push'
+      # Build & push imagen según rama
+      - name: Build & Push Docker image (develop)
+        if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/rext-dev/setai-bot:${{ github.sha }}
-            ghcr.io/rext-dev/setai-bot:latest
+            ghcr.io/rext-dev/setai-api:${{ github.sha }}
+            ghcr.io/rext-dev/setai-api:latest
+            ghcr.io/rext-dev/setai-api:develop
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+
+      - name: Build & Push Docker image (main)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/rext-dev/setai-api:latest
+            ghcr.io/rext-dev/setai-api:stable
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+
+      # Build sin push para PR
+      - name: Build Docker image (PR)
+        if: github.event_name == 'pull_request'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
           build-args: |
             GIT_SHA=${{ github.sha }}
