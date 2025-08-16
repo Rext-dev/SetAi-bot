@@ -64,9 +64,9 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/rext-dev/setai-api:${{ github.sha }}
-            ghcr.io/rext-dev/setai-api:latest
-            ghcr.io/rext-dev/setai-api:develop
+            ghcr.io/rext-dev/setai-bot:${{ github.sha }}
+            ghcr.io/rext-dev/setai-bot:latest
+            ghcr.io/rext-dev/setai-bot:develop
           build-args: |
             GIT_SHA=${{ github.sha }}
 
@@ -77,8 +77,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/rext-dev/setai-api:latest
-            ghcr.io/rext-dev/setai-api:stable
+            ghcr.io/rext-dev/setai-bot:latest
+            ghcr.io/rext-dev/setai-bot:stable
           build-args: |
             GIT_SHA=${{ github.sha }}
 
