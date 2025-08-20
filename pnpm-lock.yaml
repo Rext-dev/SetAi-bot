@@ -39,6 +39,9 @@ importers:
       jest:
         specifier: ^30.0.5
         version: 30.0.5(@types/node@24.3.0)(ts-node@10.9.2(@types/node@24.3.0)(typescript@5.9.2))
+      jest-mock-extended:
+        specifier: ^4.0.0
+        version: 4.0.0(@jest/globals@30.0.5)(jest@30.0.5(@types/node@24.3.0)(ts-node@10.9.2(@types/node@24.3.0)(typescript@5.9.2)))(typescript@5.9.2)
       ts-jest:
         specifier: ^29.4.1
         version: 29.4.1(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(babel-jest@30.0.5(@babel/core@7.28.3))(esbuild@0.25.9)(jest-util@30.0.5)(jest@30.0.5(@types/node@24.3.0)(ts-node@10.9.2(@types/node@24.3.0)(typescript@5.9.2)))(typescript@5.9.2)
@@ -1624,6 +1627,13 @@ packages:
     resolution: {integrity: sha512-NAiDOhsK3V7RU0Aa/HnrQo+E4JlbarbmI3q6Pi4KcxicdtjV82gcIUrejOtczChtVQR4kddu1E1EJlW6EN9IyA==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
+  jest-mock-extended@4.0.0:
+    resolution: {integrity: sha512-7BZpfuvLam+/HC+NxifIi9b+5VXj/utUDMPUqrDJehGWVuXPtLS9Jqlob2mJLrI/pg2k1S8DMfKDvEB88QNjaQ==}
+    peerDependencies:
+      '@jest/globals': ^28.0.0 || ^29.0.0 || ^30.0.0
+      jest: ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0 || ^28.0.0 || ^29.0.0 || ^30.0.0
+      typescript: ^3.0.0 || ^4.0.0 || ^5.0.0
+
   jest-mock@30.0.5:
     resolution: {integrity: sha512-Od7TyasAAQX/6S+QCbN6vZoWOMwlTtzzGuxJku1GhGanAjz9y+QsQkpScDmETvdc9aSXyJ/Op4rhpMYBWW91wQ==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -2023,6 +2033,14 @@ packages:
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
+
+  ts-essentials@10.1.1:
+    resolution: {integrity: sha512-4aTB7KLHKmUvkjNj8V+EdnmuVTiECzn3K+zIbRthumvHu+j44x3w63xpfs0JL3NGIzGXqoQ7AV591xHO+XrOTw==}
+    peerDependencies:
+      typescript: '>=4.5.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   ts-jest@29.4.1:
     resolution: {integrity: sha512-SaeUtjfpg9Uqu8IbeDKtdaS0g8lS6FT6OzM3ezrDfErPJPHNDo/Ey+VFGP1bQIDfagYDLyRpd7O15XpG1Es2Uw==}
@@ -4084,6 +4102,13 @@ snapshots:
       slash: 3.0.0
       stack-utils: 2.0.6
 
+  jest-mock-extended@4.0.0(@jest/globals@30.0.5)(jest@30.0.5(@types/node@24.3.0)(ts-node@10.9.2(@types/node@24.3.0)(typescript@5.9.2)))(typescript@5.9.2):
+    dependencies:
+      '@jest/globals': 30.0.5
+      jest: 30.0.5(@types/node@24.3.0)(ts-node@10.9.2(@types/node@24.3.0)(typescript@5.9.2))
+      ts-essentials: 10.1.1(typescript@5.9.2)
+      typescript: 5.9.2
+
   jest-mock@30.0.5:
     dependencies:
       '@jest/types': 30.0.5
@@ -4520,6 +4545,10 @@ snapshots:
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
+
+  ts-essentials@10.1.1(typescript@5.9.2):
+    optionalDependencies:
+      typescript: 5.9.2
 
   ts-jest@29.4.1(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(babel-jest@30.0.5(@babel/core@7.28.3))(esbuild@0.25.9)(jest-util@30.0.5)(jest@30.0.5(@types/node@24.3.0)(ts-node@10.9.2(@types/node@24.3.0)(typescript@5.9.2)))(typescript@5.9.2):
     dependencies:
