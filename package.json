@@ -22,20 +22,22 @@
   ],
   "author": "Rext-dev",
   "license": "MIT",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.0",
   "dependencies": {
-    "discord.js": "^14.15.3",
+    "@discordjs/builders": "^1.11.3",
+    "discord.js": "^14.21.0",
     "dotenv": "^17.2.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-env": "^7.28.3",
     "@babel/preset-typescript": "^7.27.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.0",
     "babel-jest": "^30.0.5",
     "esbuild": "^0.25.9",
     "jest": "^30.0.5",
-    "ts-jest": "^29.2.5",
+    "jest-mock-extended": "^4.0.0",
+    "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.4",
     "typescript": "^5.5.4"
