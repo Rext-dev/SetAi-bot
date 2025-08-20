@@ -22,6 +22,8 @@ module.exports = {
     "!bot/src/**/*.d.ts",
     "!bot/src/**/*.types.ts",
     "!bot/src/**/*.interface.ts",
+    "!bot/src/index.ts",
+    "!bot/src/types/*",
   ],
   coverageDirectory: "coverage",
 };
