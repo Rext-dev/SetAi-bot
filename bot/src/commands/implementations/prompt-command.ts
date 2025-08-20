@@ -57,9 +57,7 @@ export class PromptCommand extends BaseCommand {
       });
     } catch (error) {
       console.error("Error processing prompt:", error);
-      await interaction.editReply(
-        "Sorry, there was an error processing your prompt."
-      );
+      await this.safeReply(interaction, prompt);
     }
   }
 
