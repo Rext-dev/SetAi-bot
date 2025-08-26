@@ -39,7 +39,7 @@
     "jest-mock-extended": "^4.0.0",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
-    "tsx": "^4.20.4",
+    "tsx": "^4.20.5",
     "typescript": "^5.5.4"
   }
 }
